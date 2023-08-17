@@ -24,7 +24,7 @@ pipeline {
 
         stage("saida!") {
             steps {
-                sh "deactivate"
+                sh "ls "
             }
         }
     }
