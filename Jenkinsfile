@@ -1,13 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage("entrada") {
-            steps {
-                sh "git clone https://github.com/hrchlhck/devsec.github.io.git"
-            }
-        }
-
-        stage("meio") {
+        stage("Build") {
             steps {
                 sh "python3 -m venv venv"
                 sh ". venv/bin/activate"
@@ -16,15 +10,15 @@ pipeline {
             }
         }
 
-        stage("testes") {
+        stage("Tests") {
             steps {
-                sh "python3 -m unittest"
+                sh "venv/bin/python3 -m unittest"
             }
         }
 
-        stage("saida!") {
+        stage("Cleanup") {
             steps {
-                sh "ls "
+                sh "rm -rf ./venv"
             }
         }
     }
